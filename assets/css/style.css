@@ -1,0 +1,30 @@
+body {
+    background-image: url("../images/Disney_Background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.topImage {
+    position: relative;
+    margin-top: 0;
+    margin-left: 200px;
+    height: 300px;
+    width: 300px;
+    align-content: center;
+}
+
+h1 {
+    text-align: center;
+    margin: auto;
+    font-family: cursive;
+    color: red;
+}
+
+.container {
+    background-color: white;
+    width: 640px;
+    height: 700px;
+    box-shadow: 10px 10px 5px grey;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

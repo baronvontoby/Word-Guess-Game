@@ -9,10 +9,12 @@
 
 var wins = 0;
 var losses = 0;
-var answer = ["b","e","l","l"];
+var answer = ["b","e","l","l","e"];
 var triesRemaining = 10;
 var correctWord = "";
 console.log(correctWord);
+
+// document.getElementById("remaining-guesses").nodeType= triesRemaining;
 
 //create a function that recognizes what onkeyup was pressed
 
@@ -21,11 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
         // console.log(event);
         if ( answer.includes(event.key)) {
             console.log("correct " + event.key + " is in the answer!")
-            event.key = correctWord;
-            console.log(correctWord);
-            correctWord = answer;
+            // event.key = correctWord;
+            // console.log(correctWord);
+            // correctWord = answer;
             wins++;
-
+            var crctLtr = document.createTextNode(event.key);
+            document.getElementById("correct-letters").appendChild(crctLtr);
         } 
 
         else if (triesRemaining>1) {
@@ -33,6 +36,8 @@ document.addEventListener('DOMContentLoaded', function () {
             triesRemaining = triesRemaining - 1;
             console.log(triesRemaining);
             console.log("Darn IT that's wrong! try again.");
+            var gess = document.createTextNode(triesRemaining);
+            document.getElementById("remaining-guesses").appendChild(gess);
         }
 
         else {

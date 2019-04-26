@@ -1,14 +1,18 @@
 // get doucment by id so that when game starts the element becomes hidden
 // lets start the game by hiding the element that says hit any key to start the game
 
-//create an array that houses the answers to your question
-const ANSWERS = [
-    {"bell":"BELL"},
-    {"gaston":"GASTON"},
-];
+//create an array that houses the answers to your question for randomization
+// const ANSWERS = [
+//     {"bell":"BELL"},
+//     {"gaston":"GASTON"},
+// ];
 
-var answer = "bell";
+var wins = 0;
+var losses = 0;
+var answer = ["b","e","l","l"];
 var triesRemaining = 10;
+var correctWord = "";
+console.log(correctWord);
 
 //create a function that recognizes what onkeyup was pressed
 
@@ -17,10 +21,14 @@ document.addEventListener('DOMContentLoaded', function () {
         // console.log(event);
         if ( answer.includes(event.key)) {
             console.log("correct " + event.key + " is in the answer!")
-            
+            event.key = correctWord;
+            console.log(correctWord);
+            correctWord = answer;
+            wins++;
+
         } 
 
-        else if (triesRemaining>0) {
+        else if (triesRemaining>1) {
 
             triesRemaining = triesRemaining - 1;
             console.log(triesRemaining);
@@ -30,8 +38,9 @@ document.addEventListener('DOMContentLoaded', function () {
         else {
             triesRemaining = 0;
             console.log("game over");
+            triesRemaining = 10;
+            losses++;
         }
-
     }
 });
 

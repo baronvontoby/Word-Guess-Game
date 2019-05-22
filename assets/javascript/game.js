@@ -1,77 +1,56 @@
-// get doucment by id so that when game starts the element becomes hidden
-// lets start the game by hiding the element that says hit any key to start the game
-
-//create an array that houses the answers to your question for randomization
-// const ANSWERS = [
-//     {"bell":"BELL"},
-//     {"gaston":"GASTON"},
-// ];
-
 var wins = 0;
 var losses = 0;
-var answer = ["b","e","l","l","e"];
-var triesRemaining = 10;
+const answers = [
+    {answer: ['b','e','l','l','e'],
+     image:'../images.belle.jpg'},
+    {answer: ['g','a','s','t','o','n'],
+     image:'../images.gaston.jpg' }
+];
 
 
-// document.getElementById("remaining-guesses").nodeType= triesRemaining;
+var guesses = 10;
+var guessWord = '';
+var lettersCorrect = [];
+var lettersIncorrect = [];
 
-//create a function that recognizes what onkeyup was pressed
+document.getElementById("start-game").addEventListener('click', game);
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.onkeyup = function (event) {
-        // console.log(event);
-        if ( answer.includes(event.key)) {
-            console.log("correct " + event.key + " is in the answer!")
-            var crctLtr = document.createTextNode(event.key);
-            document.getElementById("correct-letters").appendChild(crctLtr);
-        } 
+function random (){
+    var generator = Math.floor(Math.random()*2)
+    return generator;
+}
 
-        else if (document.getElementById("correct-letter") = answer) {
-            wins++;
-            triesRemaining = 10;
-            console.log("yay you won!");
-
+function game (){
+    var randomNumber = random();
+    guessWord = answers[randomNumber].answer;
+    console.log(guessWord);
+    document.addEventListener('keyup', function(event){
+        function checker () {
+            for (let i = 0; i<guessWord.length; i++){
+                if ( event.key == guessWord[i] ) {
+                    console.log('correct letter');
+                    //record to DOM the correct letter
+                    //push letter to open array
+                    if (lettersCorrect === guessWord ) {
+                        wins++;
+                    }
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
         }
-
-        else if (triesRemaining>1) {
-
-            triesRemaining = triesRemaining - 1;
-            console.log(triesRemaining);
-            console.log("Darn IT that's wrong! try again.");
-            var gess = document.createTextNode(triesRemaining);
-            document.getElementById("remaining-guesses").appendChild(gess);
-
+        value = checker();
+        if (value === false) {
+            guesses--;
+            console.log(guesses);
+            //record to DOM the incorrect letter
+            if ( guesses === 0 ) {
+                losses++;
+                console.log('lost');
+                guesses = 10;
+            }
         }
-
-        else {
-            triesRemaining = 0;
-            console.log("game over");
-            triesRemaining = 10;
-            losses++;
-        }
-    }
-});
-
-//create a function that records your wins
-// function needs to pull data from game function
-
-// for (let i=0; i<ANSWERS.length; i++) {
-//     if (ANSWERS.indexOf(/*keyPressed*/) == 
-//     }
-// }
-// function winRecord() {
-
-// }
-// //create a 3 functions, one that tells you if you got your letter right, one that tells you if you got your letter wrong, one that tells you how many guesses you have left
-
-// function startGame() {
-
-// }
-
-//create a function that resets the game to the next line in the array
-
-// var alphabet = "abcdefghijklmnopqrstuvwxyz";
-
-// if (!ANSWERS.indexOf(/*keyPressed*/) >=0) {
-//     return;
-// }
+    });
+}
